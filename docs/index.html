@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>AuraRemote</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-top">
+                <h1>AuraRemote</h1>
+                <button id="help-btn" class="btn-icon" aria-label="Help">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </button>
+            </div>
+            <div id="status" class="status disconnected">Disconnected</div>
+        </header>
+
+        <section class="setup-panel">
+            <input type="text" id="tv-ip" placeholder="TV IP (e.g. 192.168.1.50)">
+            <label class="secure-toggle">
+                <input type="checkbox" id="use-secure" checked> Use WSS (Port 3001)
+            </label>
+            <button id="connect-btn">Connect TV</button>
+        </section>
+
+        <section class="remote-panel">
+            <div class="btn-row">
+                <button class="btn btn-power" data-uri="ssap://system/turnOff">Power Off</button>
+                <button class="btn btn-home" data-uri="ssap://com.webos.applicationManager/launch" data-payload='{"id":"com.webos.app.home"}'>Home</button>
+            </div>
+            
+            <div class="vol-ch-controls">
+                <div class="control-group">
+                    <button class="btn" data-uri="ssap://audio/volumeUp">+</button>
+                    <span>VOL</span>
+                    <button class="btn" data-uri="ssap://audio/volumeDown">-</button>
+                </div>
+                <button class="btn btn-mute" data-uri="ssap://audio/setMute" data-payload='{"mute":true}'>Mute</button>
+                <div class="control-group">
+                    <button class="btn" data-uri="ssap://tv/channelUp">ʌ</button>
+                    <span>CH</span>
+                    <button class="btn" data-uri="ssap://tv/channelDown">v</button>
+                </div>
+            </div>
+
+            <div class="media-controls">
+                <button class="btn" data-uri="ssap://media.controls/play">Play</button>
+                <button class="btn" data-uri="ssap://media.controls/pause">Pause</button>
+                <button class="btn" data-uri="ssap://media.controls/stop">Stop</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="modal">
+        <div class="modal-box">
+            <h2>How to Connect</h2>
+            <ol>
+                <li>Find your TV's IP address in its <strong>Network Settings</strong> and enter it on the main screen.</li>
+                <li>Because GitHub Pages uses secure HTTPS, browsers block local network connections to your TV by default.</li>
+                <li>To bypass this, you must trust the TV's security certificate. Tap the generated link below:</li>
+                <div class="link-box">
+                    <a id="trust-link" href="#" target="_blank">Enter an IP address first...</a>
+                </div>
+                <li>Safari/Chrome will warn you <em>"Connection is Not Private"</em>. Tap <strong>Show Details → Visit this website</strong> (or Advanced → Proceed).</li>
+                <li>It will load a blank page. <strong>This is success!</strong> Close that tab, return to this app, ensure <strong>Use WSS</strong> is checked, and hit Connect.</li>
+            </ol>
+            <button id="close-modal" class="btn-close-modal">Got it</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
