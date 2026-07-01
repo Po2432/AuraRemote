@@ -27,6 +27,10 @@
         </header>
 
         <section class="setup-panel">
+            <div id="saved-tvs-container" style="display: none;">
+                <span class="label">Recent TVs:</span>
+                <div id="saved-tvs-list"></div>
+            </div>
             <input type="text" id="tv-ip" placeholder="TV IP (e.g. 192.168.1.50)">
             <label class="secure-toggle">
                 <input type="checkbox" id="use-secure" checked> Use WSS (Port 3001)
@@ -37,7 +41,20 @@
         <section class="remote-panel">
             <div class="btn-row">
                 <button class="btn btn-power" data-uri="ssap://system/turnOff">Power Off</button>
-                <button class="btn btn-home" data-uri="ssap://com.webos.applicationManager/launch" data-payload='{"id":"com.webos.app.home"}'>Home</button>
+                <button class="btn btn-mute" data-uri="ssap://audio/setMute" data-payload='{"mute":true}'>Mute</button>
+            </div>
+
+            <!-- Directional Navigation -->
+            <div class="navigation-controls">
+                <button class="btn btn-action" data-key="BACK">Back</button>
+                <div class="d-pad">
+                    <button class="btn btn-dir btn-up" data-key="UP">▲</button>
+                    <button class="btn btn-dir btn-left" data-key="LEFT">◄</button>
+                    <button class="btn btn-dir btn-ok" data-key="ENTER">OK</button>
+                    <button class="btn btn-dir btn-right" data-key="RIGHT">►</button>
+                    <button class="btn btn-dir btn-down" data-key="DOWN">▼</button>
+                </div>
+                <button class="btn btn-action btn-home" data-uri="ssap://com.webos.applicationManager/launch" data-payload='{"id":"com.webos.app.home"}'>Home</button>
             </div>
             
             <div class="vol-ch-controls">
@@ -46,7 +63,6 @@
                     <span>VOL</span>
                     <button class="btn" data-uri="ssap://audio/volumeDown">-</button>
                 </div>
-                <button class="btn btn-mute" data-uri="ssap://audio/setMute" data-payload='{"mute":true}'>Mute</button>
                 <div class="control-group">
                     <button class="btn" data-uri="ssap://tv/channelUp">ʌ</button>
                     <span>CH</span>
@@ -73,7 +89,7 @@
                 <div class="link-box">
                     <a id="trust-link" href="#" target="_blank">Enter an IP address first...</a>
                 </div>
-                <li>Safari/Chrome will warn you <em>"Connection is Not Private"</em>. Tap <strong>Show Details → Visit this website</strong> (or Advanced → Proceed).</li>
+                <li>Safari/Chrome will warn you <em>"Connection is Not Private"</em>. Tap <strong>Show Details → Visit this website</strong>.</li>
                 <li>It will load a blank page. <strong>This is success!</strong> Close that tab, return to this app, ensure <strong>Use WSS</strong> is checked, and hit Connect.</li>
             </ol>
             <button id="close-modal" class="btn-close-modal">Got it</button>
