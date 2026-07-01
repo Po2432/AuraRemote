@@ -1,0 +1,17 @@
+{
+  "name": "AuraRemote",
+  "short_name": "AuraRemote",
+  "description": "Offline PWA Remote Control for LG webOS TVs",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1C1C1E",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
